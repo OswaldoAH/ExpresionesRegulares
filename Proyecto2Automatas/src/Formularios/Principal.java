@@ -5,15 +5,16 @@
  */
 package Formularios;
 
+import Clases.Generar_Grafica;
+import Clases.ValidarPalabra;
 import com.sun.awt.AWTUtilities;
-import dk.brics.automaton.Automaton;
-import dk.brics.automaton.RegExp;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Shape;
 import java.awt.geom.RoundRectangle2D;
 import java.util.ArrayList;
 import java.util.Collections;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -32,6 +33,8 @@ public class Principal extends javax.swing.JFrame {
         Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 27, 27);
         AWTUtilities.setWindowShape(this, forma);
         alfabeto = new ArrayList<>();
+        graf = new Generar_Grafica();
+        validar = new ValidarPalabra();
     }
 
     /**
@@ -55,10 +58,12 @@ public class Principal extends javax.swing.JFrame {
         rSTableMetro1 = new rojerusan.RSTableMetro();
         jScrollPane1 = new javax.swing.JScrollPane();
         panelGrafico = new javax.swing.JPanel();
+        lblGrafico = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtPalabra = new javax.swing.JTextField();
         btnIngresar = new javax.swing.JButton();
+        btnGraficar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,13 +90,13 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(930, 10, 40, 40);
+        jLabel4.setBounds(1130, 10, 40, 40);
 
         jLabel2.setFont(new java.awt.Font("MV Boli", 3, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText(" Expresiones Regulares");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(330, 10, 290, 30);
+        jLabel2.setBounds(470, 10, 290, 30);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logo_portal.png"))); // NOI18N
         jPanel1.add(jLabel3);
@@ -108,7 +113,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txtExpresion);
-        txtExpresion.setBounds(10, 410, 220, 40);
+        txtExpresion.setBounds(10, 430, 670, 40);
 
         btnIngresarPalabra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/checkmark.png"))); // NOI18N
         btnIngresarPalabra.setBorderPainted(false);
@@ -121,7 +126,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnIngresarPalabra);
-        btnIngresarPalabra.setBounds(650, 450, 60, 50);
+        btnIngresarPalabra.setBounds(710, 470, 60, 50);
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("MV Boli", 3, 24)); // NOI18N
@@ -133,7 +138,7 @@ public class Principal extends javax.swing.JFrame {
         lblAlfabeto.setFont(new java.awt.Font("MV Boli", 3, 24)); // NOI18N
         lblAlfabeto.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(lblAlfabeto);
-        lblAlfabeto.setBounds(90, 90, 880, 40);
+        lblAlfabeto.setBounds(90, 90, 1080, 40);
 
         jScrollPane3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jScrollPane3.setOpaque(true);
@@ -166,28 +171,30 @@ public class Principal extends javax.swing.JFrame {
         }
 
         jPanel1.add(jScrollPane3);
-        jScrollPane3.setBounds(650, 130, 320, 220);
+        jScrollPane3.setBounds(730, 130, 440, 220);
 
         jScrollPane1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         panelGrafico.setBackground(new java.awt.Color(0, 102, 102));
         panelGrafico.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelGrafico.add(lblGrafico, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1300, 200));
+
         jScrollPane1.setViewportView(panelGrafico);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 130, 630, 220);
+        jScrollPane1.setBounds(10, 130, 650, 220);
 
         jLabel5.setFont(new java.awt.Font("MV Boli", 3, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Expresión Regular");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(10, 360, 220, 40);
+        jLabel5.setBounds(10, 380, 670, 40);
 
         jLabel7.setFont(new java.awt.Font("MV Boli", 3, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Palabra");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(650, 360, 320, 40);
+        jLabel7.setBounds(710, 380, 320, 40);
 
         txtPalabra.setEditable(false);
         txtPalabra.setBackground(new java.awt.Color(255, 255, 255));
@@ -201,7 +208,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txtPalabra);
-        txtPalabra.setBounds(650, 410, 320, 40);
+        txtPalabra.setBounds(710, 430, 460, 40);
 
         btnIngresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/checkmark.png"))); // NOI18N
         btnIngresar.setBorderPainted(false);
@@ -213,19 +220,33 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnIngresar);
-        btnIngresar.setBounds(20, 450, 60, 50);
+        btnIngresar.setBounds(10, 470, 60, 50);
+
+        btnGraficar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/reload.png"))); // NOI18N
+        btnGraficar.setBorderPainted(false);
+        btnGraficar.setContentAreaFilled(false);
+        btnGraficar.setEnabled(false);
+        btnGraficar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGraficarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnGraficar);
+        btnGraficar.setBounds(660, 130, 60, 50);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 982, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1178, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -241,11 +262,10 @@ public class Principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtExpresionKeyTyped
 
-    private void verificar() {
-        String cadena = txtExpresion.getText();
-        cad = cadena.toCharArray();
+    private boolean verificar() {
+        String cadena=txtExpresion.getText();
+        cad=cadena.toCharArray();
         for (int i = 0; i < cad.length; i++) {
-            System.out.println(cad[i]);
             switch (cad[i]) {
                 case '(':
                     cont += 1;
@@ -282,9 +302,11 @@ public class Principal extends javax.swing.JFrame {
             btnIngresar.setEnabled(false);
             btnIngresarPalabra.setEnabled(true);
             txtPalabra.setEditable(true);
+            return true;
         } else {
             cont = 0;
             JOptionPane.showMessageDialog(null, "Expresión regular incorrecta");
+            return false;
         }
     }
     private void btnIngresarPalabraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarPalabraActionPerformed
@@ -314,24 +336,32 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         if (txtExpresion.getText().length() != 0) {
-            RegExp r = new RegExp(txtExpresion.getText());
-            
-            Automaton a = r.toAutomaton();
-            char [] array =a.toDot().toCharArray();
-            for(int i=0;i<array.length;i++){
-                System.out.print(array[i]);
+            if (verificar()) {
+                if (graf.SetER(txtExpresion.getText())) {
+                    btnGraficar.setEnabled(true);
+                    validar.insertar(cad);
+                }
             }
-            
         } else {
             JOptionPane.showMessageDialog(null, "El campo \"expresión regular\" está vacío.");
             txtExpresion.requestFocus();
         }
     }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void btnGraficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarActionPerformed
+        lblGrafico.setIcon(new ImageIcon("Automata.jpg"));
+        lblGrafico.repaint();
+        panelGrafico.repaint();
+
+    }//GEN-LAST:event_btnGraficarActionPerformed
     private final ArrayList<String> alfabeto;
     private int cont = 0;
     private char cad[];
     private int x, y;
+    private final Generar_Grafica graf;
+    private ValidarPalabra validar;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGraficar;
     private javax.swing.JButton btnIngresar;
     private javax.swing.JButton btnIngresarPalabra;
     private javax.swing.JLabel jLabel1;
@@ -344,6 +374,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblAlfabeto;
+    private javax.swing.JLabel lblGrafico;
     private javax.swing.JPanel panelGrafico;
     private rojerusan.RSTableMetro rSTableMetro1;
     private javax.swing.JTextField txtExpresion;
