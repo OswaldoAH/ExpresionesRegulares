@@ -310,7 +310,12 @@ public class Principal extends javax.swing.JFrame {
         }
     }
     private void btnIngresarPalabraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarPalabraActionPerformed
-
+        char[]cadena=txtPalabra.getText().toCharArray();
+        if(validar.Buscar(cadena)){
+            JOptionPane.showMessageDialog(null, "Cadena aceptada");
+        }else{
+            JOptionPane.showMessageDialog(null, "Cadena no aceptada");
+        }
     }//GEN-LAST:event_btnIngresarPalabraActionPerformed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
