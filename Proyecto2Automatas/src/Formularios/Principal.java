@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -64,6 +65,9 @@ public class Principal extends javax.swing.JFrame {
         txtPalabra = new javax.swing.JTextField();
         btnIngresar = new javax.swing.JButton();
         btnGraficar = new javax.swing.JButton();
+        btnNuevo = new javax.swing.JButton();
+        rSLabelVerticalD1 = new rojerusan.RSLabelVerticalD();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,17 +94,17 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(1130, 10, 40, 40);
+        jLabel4.setBounds(1230, 10, 40, 40);
 
         jLabel2.setFont(new java.awt.Font("MV Boli", 3, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText(" Expresiones Regulares");
+        jLabel2.setText("Autómata Finito No Determinista");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(470, 10, 290, 30);
+        jLabel2.setBounds(420, 10, 440, 30);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logo_portal.png"))); // NOI18N
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(0, 0, 200, 86);
+        jLabel3.setBounds(0, 0, 220, 90);
 
         txtExpresion.setBackground(new java.awt.Color(255, 255, 255));
         txtExpresion.setFont(new java.awt.Font("MV Boli", 3, 24)); // NOI18N
@@ -136,7 +140,7 @@ public class Principal extends javax.swing.JFrame {
 
         lblAlfabeto.setBackground(new java.awt.Color(0, 0, 0));
         lblAlfabeto.setFont(new java.awt.Font("MV Boli", 3, 24)); // NOI18N
-        lblAlfabeto.setForeground(new java.awt.Color(0, 0, 0));
+        lblAlfabeto.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(lblAlfabeto);
         lblAlfabeto.setBounds(90, 90, 1080, 40);
 
@@ -151,7 +155,7 @@ public class Principal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Palabra", "Valido"
+                "Palabra", "Válido"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -213,6 +217,9 @@ public class Principal extends javax.swing.JFrame {
         txtPalabra.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txtPalabra.setOpaque(true);
         txtPalabra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPalabraKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtPalabraKeyTyped(evt);
             }
@@ -235,6 +242,7 @@ public class Principal extends javax.swing.JFrame {
         btnGraficar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/reload.png"))); // NOI18N
         btnGraficar.setBorderPainted(false);
         btnGraficar.setContentAreaFilled(false);
+        btnGraficar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGraficar.setEnabled(false);
         btnGraficar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -242,7 +250,32 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnGraficar);
-        btnGraficar.setBounds(750, 130, 60, 50);
+        btnGraficar.setBounds(750, 410, 60, 50);
+
+        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Clear.png"))); // NOI18N
+        btnNuevo.setBorderPainted(false);
+        btnNuevo.setContentAreaFilled(false);
+        btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnNuevo);
+        btnNuevo.setBounds(80, 560, 60, 50);
+
+        rSLabelVerticalD1.setForeground(new java.awt.Color(255, 255, 255));
+        rSLabelVerticalD1.setText("Gráficar ------------->");
+        rSLabelVerticalD1.setFont(new java.awt.Font("MV Boli", 3, 24)); // NOI18N
+        jPanel1.add(rSLabelVerticalD1);
+        rSLabelVerticalD1.setBounds(760, 130, 40, 280);
+
+        jLabel6.setFont(new java.awt.Font("MV Boli", 3, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Expresiones Regulares");
+        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(490, 40, 410, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -273,36 +306,56 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtExpresionKeyTyped
 
     private boolean verificar() {
-        String cadena = txtExpresion.getText();
-        cad = cadena.toCharArray();
+        cad = txtExpresion.getText().toCharArray();
+        boolean errores = false;
         for (int i = 0; i < cad.length; i++) {
-            switch (cad[i]) {
-                case '(':
-                    cont += 1;
-                    break;
-                case ')':
-                    cont -= 1;
-                    break;
-                default:
-                    if (cad[i] != '*' && cad[i] != '|') {
-                        if (alfabeto.isEmpty()) {
-                            alfabeto.add("" + cad[i]);
-                        } else {
-                            boolean encontrado = false;
-                            for (String alfabeto1 : alfabeto) {
-                                if (alfabeto1.equals("" + cad[i])) {
-                                    encontrado = true;
+            if (cad[0] == '*' || cad[0] == '|' || cad[0]==')') {
+                errores = true;
+            } else {
+                switch (cad[i]) {
+                    case '(':
+                        cont += 1;
+                        if (cad[i+1] == '*' || cad[i+1] == '|'){
+                            errores=true;
+                        }
+                        break;
+                    case ')':
+                        if(i+1==cad.length){
+                            if(cad[i]=='|')
+                                errores=true;
+                        }
+                        cont -= 1;
+                        break;
+                    default:
+                        if (cad[i] != '*' && cad[i] != '|') {
+                            if (alfabeto.isEmpty()) {
+                                alfabeto.add("" + cad[i]);
+                            } else {
+                                if(i+1==cad.length && cad[i]=='|'){
+                                    errores=true;
+                                }else{
+                                    if(cad[i]=='|'){
+                                        if(cad[i+1]=='*'||cad[i]==')'){
+                                            errores=true;
+                                        }
+                                    }
+                                }
+                                boolean encontrado = false;
+                                for (String alfabeto1 : alfabeto) {
+                                    if (alfabeto1.equals("" + cad[i])) {
+                                        encontrado = true;
+                                    }
+                                }
+                                if (!encontrado) {
+                                    alfabeto.add("" + cad[i]);
                                 }
                             }
-                            if (!encontrado) {
-                                alfabeto.add("" + cad[i]);
-                            }
                         }
-                    }
-                    break;
+                        break;
+                }
             }
         }
-        if (cont == 0) {
+        if (cont == 0 && !errores) {
             String texto = "{ ";
             Collections.sort(alfabeto);
             texto = alfabeto.stream().map((alf) -> alf).reduce(texto, String::concat);
@@ -354,14 +407,27 @@ public class Principal extends javax.swing.JFrame {
         this.cad = aux1.toCharArray();
     }
     private void btnIngresarPalabraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarPalabraActionPerformed
-        char[] cadena = txtPalabra.getText().toCharArray();
-        if (validar.Buscar(cadena)) {
-            JOptionPane.showMessageDialog(null, "Cadena aceptada");
-        } else {
-            JOptionPane.showMessageDialog(null, "Cadena no aceptada");
-        }
+        Buscar();
     }//GEN-LAST:event_btnIngresarPalabraActionPerformed
 
+    private void Buscar() {
+        char[] cadena = txtPalabra.getText().toCharArray();
+
+        if (validar.Buscar(cadena)) {
+            JTPalabras.setModel(llenartablabla("Si"));
+        } else {
+            JTPalabras.setModel(llenartablabla("No"));
+        }
+    }
+
+    private DefaultTableModel llenartablabla(String valido) {
+        DefaultTableModel modelo = (DefaultTableModel) JTPalabras.getModel();
+        String[] cadena = new String[2];
+        cadena[0] = txtPalabra.getText();
+        cadena[1] = valido;
+        modelo.addRow(cadena);
+        return modelo;
+    }
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         this.dispose();
     }//GEN-LAST:event_jLabel4MouseClicked
@@ -389,9 +455,9 @@ public class Principal extends javax.swing.JFrame {
                 if (graf.SetER(txtExpresion.getText())) {
                     btnGraficar.setEnabled(true);
                     verificarEK(cad);
-                    if(parentesis){
+                    if (parentesis) {
                         validar.insertarConParentesis(cad);
-                    }else{
+                    } else {
                         validar.insertarSinParentesis(cad);
                     }
                 }
@@ -407,23 +473,53 @@ public class Principal extends javax.swing.JFrame {
         imagen.getImage().flush();
         lblGrafico.setIcon(imagen);
     }//GEN-LAST:event_btnGraficarActionPerformed
-    private final ArrayList<String> alfabeto;
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        Limpiar();
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
+    private void txtPalabraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPalabraKeyPressed
+        if (evt.getKeyChar() == 10) {
+            Buscar();
+        }
+    }//GEN-LAST:event_txtPalabraKeyPressed
+
+    private void Limpiar() {
+        lblAlfabeto.setText("");
+        txtExpresion.setEditable(true);
+        txtExpresion.setText("");
+        txtExpresion.requestFocus();
+        txtPalabra.setText("");
+        alfabeto = new ArrayList<>();
+        cont = 0;
+        validar = new ValidarPalabra();
+        parentesis = false;
+        btnIngresar.setEnabled(true);
+        btnIngresarPalabra.setEnabled(false);
+        DefaultTableModel modelo = (DefaultTableModel) JTPalabras.getModel();
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+    }
+    private ArrayList<String> alfabeto;
     private int cont = 0;
     private char cad[];
     private int x, y;
     private final Generar_Grafica graf;
-    private final ValidarPalabra validar;
+    private ValidarPalabra validar;
     private boolean parentesis = false;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private rojerusan.RSTableMetro JTPalabras;
     private javax.swing.JButton btnGraficar;
     private javax.swing.JButton btnIngresar;
     private javax.swing.JButton btnIngresarPalabra;
+    private javax.swing.JButton btnNuevo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -431,6 +527,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel lblAlfabeto;
     private javax.swing.JLabel lblGrafico;
     private javax.swing.JPanel panelGrafico;
+    private rojerusan.RSLabelVerticalD rSLabelVerticalD1;
     private javax.swing.JTextField txtExpresion;
     private javax.swing.JTextField txtPalabra;
     // End of variables declaration//GEN-END:variables

@@ -8,21 +8,23 @@ package Clases;
 import java.util.ArrayList;
 
 /**
- *
+ * Clase nodo que contiene todos mis atributos para mis estados
  * @author mynor
  */
 public class Nodo {
-
+    //Declaración del los atributos de mis estados
     private ArrayList<Integer> MoverA;
     private ArrayList<String> CompararCon;
     private boolean Aceptado;
-
+    /**
+     * Constructos inicializa los atributos de los estados
+     */
     public Nodo() {
         MoverA = new ArrayList<>();
         CompararCon = new ArrayList<>();
         Aceptado = false;
     }
-
+    //De acá para abajo son Getters y Setters
     public ArrayList<Integer> getMoverA() {
         return MoverA;
     }

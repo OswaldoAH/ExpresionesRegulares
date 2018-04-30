@@ -16,17 +16,23 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Clase para generar la imagen.
  * @author mynor
  */
 public class Generar_Grafica {
-
+    /**
+     * Metodo que retorna un booleano me sirve para llamar al programa hacer una imagen y guardarla
+     * @param expresion
+     * @return 
+     * 
+     * lo primero que hace es que instanciar clases para la escritura de un archivo
+     * obtengo lo que el programa que gráfica me devuelve como imagen
+     * llamo al programa desde el cmd
+     * le mando ciertos parametros que me sirven para ejecutar el programa que gráfica 
+     * le digo que me lleme un txt y me genere un jpg para guardar esa imagen
+     */
     public boolean SetER(String expresion) {
         try {
-            File ar = new File("Automata.jpg");
-            if (ar.exists()) {
-                ar.delete();
-            }
             FileOutputStream archivo;
             archivo = new FileOutputStream("Automata.txt");
             RegExp r = new RegExp(expresion);
