@@ -148,13 +148,7 @@ public class Principal extends javax.swing.JFrame {
         JTPalabras.setForeground(new java.awt.Color(255, 255, 255));
         JTPalabras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"asda", null},
-                {"asdasda", null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Palabra", "Valido"
@@ -270,9 +264,9 @@ public class Principal extends javax.swing.JFrame {
 
     private void txtExpresionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtExpresionKeyTyped
         char c = evt.getKeyChar();
-        if ((c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')) {
+        if (c >= 'A' && c <= 'Z') {
             evt.consume();
-        } else if ((c != '|' && c != '(' && c != ')' && c != '*') && !(c >= 'a' && c <= 'z')) {
+        } else if ((c != '|' && c != '(' && c != ')' && c != '*') && !(c >= 'a' && c <= 'z') && !(c >= '0' && c <= '9')) {
             evt.consume();
         }
 
@@ -325,6 +319,7 @@ public class Principal extends javax.swing.JFrame {
             return false;
         }
     }
+
     private void verificarEK(char[] cad) {
         String aux1 = "";
         int j = -1;
@@ -332,6 +327,7 @@ public class Principal extends javax.swing.JFrame {
         for (int i = 0; i < cad.length; i++) {
             if (cad[i] == '(' && !encontrado) {
                 j = i;
+                parentesis = true;
                 aux1 += cad[i];
                 while (j < cad.length && !encontrado) {
                     if (cad[j] == ')' && j + 1 != cad.length) {
@@ -344,8 +340,8 @@ public class Principal extends javax.swing.JFrame {
             } else {
                 if (j != i) {
                     aux1 += cad[i];
-                }else{
-                    encontrado=false;
+                } else {
+                    encontrado = false;
                 }
             }
             if (encontrado) {
@@ -355,7 +351,7 @@ public class Principal extends javax.swing.JFrame {
             }
         }
         System.out.println(aux1);
-        this.cad=aux1.toCharArray();
+        this.cad = aux1.toCharArray();
     }
     private void btnIngresarPalabraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarPalabraActionPerformed
         char[] cadena = txtPalabra.getText().toCharArray();
@@ -393,7 +389,11 @@ public class Principal extends javax.swing.JFrame {
                 if (graf.SetER(txtExpresion.getText())) {
                     btnGraficar.setEnabled(true);
                     verificarEK(cad);
-                    validar.insertar(cad);
+                    if(parentesis){
+                        validar.insertarConParentesis(cad);
+                    }else{
+                        validar.insertarSinParentesis(cad);
+                    }
                 }
             }
         } else {
@@ -413,7 +413,7 @@ public class Principal extends javax.swing.JFrame {
     private int x, y;
     private final Generar_Grafica graf;
     private final ValidarPalabra validar;
-    private ArrayList<String> cadenas;
+    private boolean parentesis = false;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private rojerusan.RSTableMetro JTPalabras;
     private javax.swing.JButton btnGraficar;
