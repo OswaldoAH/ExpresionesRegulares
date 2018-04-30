@@ -55,7 +55,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         lblAlfabeto = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        rSTableMetro1 = new rojerusan.RSTableMetro();
+        JTPalabras = new rojerusan.RSTableMetro();
         jScrollPane1 = new javax.swing.JScrollPane();
         panelGrafico = new javax.swing.JPanel();
         lblGrafico = new javax.swing.JLabel();
@@ -113,7 +113,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txtExpresion);
-        txtExpresion.setBounds(10, 430, 670, 40);
+        txtExpresion.setBounds(10, 520, 500, 40);
 
         btnIngresarPalabra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/checkmark.png"))); // NOI18N
         btnIngresarPalabra.setBorderPainted(false);
@@ -126,7 +126,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnIngresarPalabra);
-        btnIngresarPalabra.setBounds(710, 470, 60, 50);
+        btnIngresarPalabra.setBounds(760, 560, 60, 50);
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("MV Boli", 3, 24)); // NOI18N
@@ -143,14 +143,21 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jScrollPane3.setOpaque(true);
 
-        rSTableMetro1.setBackground(new java.awt.Color(0, 102, 102));
-        rSTableMetro1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        rSTableMetro1.setModel(new javax.swing.table.DefaultTableModel(
+        JTPalabras.setBackground(new java.awt.Color(0, 102, 102));
+        JTPalabras.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        JTPalabras.setForeground(new java.awt.Color(255, 255, 255));
+        JTPalabras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {"asda", null},
+                {"asdasda", null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Palabra", "V"
+                "Palabra", "Valido"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -161,40 +168,49 @@ public class Principal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        rSTableMetro1.setColorBackgoundHead(new java.awt.Color(0, 102, 102));
-        rSTableMetro1.setColorFilasBackgound2(new java.awt.Color(0, 102, 102));
-        jScrollPane3.setViewportView(rSTableMetro1);
-        if (rSTableMetro1.getColumnModel().getColumnCount() > 0) {
-            rSTableMetro1.getColumnModel().getColumn(1).setMinWidth(30);
-            rSTableMetro1.getColumnModel().getColumn(1).setPreferredWidth(30);
-            rSTableMetro1.getColumnModel().getColumn(1).setMaxWidth(30);
+        JTPalabras.setAltoHead(60);
+        JTPalabras.setColorBackgoundHead(new java.awt.Color(0, 102, 102));
+        JTPalabras.setColorFilasBackgound2(new java.awt.Color(0, 102, 102));
+        JTPalabras.setColorFilasForeground1(new java.awt.Color(0, 102, 102));
+        JTPalabras.setColorFilasForeground2(new java.awt.Color(255, 255, 255));
+        JTPalabras.setColumnSelectionAllowed(true);
+        JTPalabras.setFont(new java.awt.Font("MV Boli", 3, 14)); // NOI18N
+        JTPalabras.setFuenteFilas(new java.awt.Font("MV Boli", 3, 18)); // NOI18N
+        JTPalabras.setFuenteHead(new java.awt.Font("MV Boli", 3, 24)); // NOI18N
+        jScrollPane3.setViewportView(JTPalabras);
+        JTPalabras.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (JTPalabras.getColumnModel().getColumnCount() > 0) {
+            JTPalabras.getColumnModel().getColumn(0).setResizable(false);
+            JTPalabras.getColumnModel().getColumn(1).setMinWidth(150);
+            JTPalabras.getColumnModel().getColumn(1).setPreferredWidth(150);
+            JTPalabras.getColumnModel().getColumn(1).setMaxWidth(150);
         }
 
         jPanel1.add(jScrollPane3);
-        jScrollPane3.setBounds(730, 130, 440, 220);
+        jScrollPane3.setBounds(810, 130, 470, 350);
 
         jScrollPane1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         panelGrafico.setBackground(new java.awt.Color(0, 102, 102));
         panelGrafico.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panelGrafico.add(lblGrafico, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1300, 200));
+        panelGrafico.add(lblGrafico, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1290, 350));
 
         jScrollPane1.setViewportView(panelGrafico);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 130, 650, 220);
+        jScrollPane1.setBounds(10, 130, 740, 360);
 
         jLabel5.setFont(new java.awt.Font("MV Boli", 3, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Expresión Regular");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(10, 380, 670, 40);
+        jLabel5.setBounds(0, 480, 670, 40);
 
         jLabel7.setFont(new java.awt.Font("MV Boli", 3, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Palabra");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(710, 380, 320, 40);
+        jLabel7.setBounds(760, 480, 320, 40);
 
         txtPalabra.setEditable(false);
         txtPalabra.setBackground(new java.awt.Color(255, 255, 255));
@@ -208,7 +224,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txtPalabra);
-        txtPalabra.setBounds(710, 430, 460, 40);
+        txtPalabra.setBounds(760, 520, 520, 40);
 
         btnIngresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/checkmark.png"))); // NOI18N
         btnIngresar.setBorderPainted(false);
@@ -220,7 +236,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnIngresar);
-        btnIngresar.setBounds(10, 470, 60, 50);
+        btnIngresar.setBounds(0, 560, 60, 50);
 
         btnGraficar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/reload.png"))); // NOI18N
         btnGraficar.setBorderPainted(false);
@@ -232,20 +248,20 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnGraficar);
-        btnGraficar.setBounds(660, 130, 60, 50);
+        btnGraficar.setBounds(750, 130, 60, 50);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1282, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -263,8 +279,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtExpresionKeyTyped
 
     private boolean verificar() {
-        String cadena=txtExpresion.getText();
-        cad=cadena.toCharArray();
+        String cadena = txtExpresion.getText();
+        cad = cadena.toCharArray();
         for (int i = 0; i < cad.length; i++) {
             switch (cad[i]) {
                 case '(':
@@ -309,11 +325,43 @@ public class Principal extends javax.swing.JFrame {
             return false;
         }
     }
+    private void verificarEK(char[] cad) {
+        String aux1 = "";
+        int j = -1;
+        boolean encontrado = false;
+        for (int i = 0; i < cad.length; i++) {
+            if (cad[i] == '(' && !encontrado) {
+                j = i;
+                aux1 += cad[i];
+                while (j < cad.length && !encontrado) {
+                    if (cad[j] == ')' && j + 1 != cad.length) {
+                        if (cad[j + 1] == '*') {
+                            encontrado = true;
+                        }
+                    }
+                    j++;
+                }
+            } else {
+                if (j != i) {
+                    aux1 += cad[i];
+                }else{
+                    encontrado=false;
+                }
+            }
+            if (encontrado) {
+                if (cad[i] != '(' && cad[i] != ')' && cad[i] != '|' && j != i) {
+                    aux1 += "*";
+                }
+            }
+        }
+        System.out.println(aux1);
+        this.cad=aux1.toCharArray();
+    }
     private void btnIngresarPalabraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarPalabraActionPerformed
-        char[]cadena=txtPalabra.getText().toCharArray();
-        if(validar.Buscar(cadena)){
+        char[] cadena = txtPalabra.getText().toCharArray();
+        if (validar.Buscar(cadena)) {
             JOptionPane.showMessageDialog(null, "Cadena aceptada");
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Cadena no aceptada");
         }
     }//GEN-LAST:event_btnIngresarPalabraActionPerformed
@@ -344,6 +392,7 @@ public class Principal extends javax.swing.JFrame {
             if (verificar()) {
                 if (graf.SetER(txtExpresion.getText())) {
                     btnGraficar.setEnabled(true);
+                    verificarEK(cad);
                     validar.insertar(cad);
                 }
             }
@@ -354,18 +403,19 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void btnGraficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarActionPerformed
-        lblGrafico.setIcon(new ImageIcon("Automata.jpg"));
-        lblGrafico.repaint();
-        panelGrafico.repaint();
-
+        ImageIcon imagen = new ImageIcon("Automata.jpg");
+        imagen.getImage().flush();
+        lblGrafico.setIcon(imagen);
     }//GEN-LAST:event_btnGraficarActionPerformed
     private final ArrayList<String> alfabeto;
     private int cont = 0;
     private char cad[];
     private int x, y;
     private final Generar_Grafica graf;
-    private ValidarPalabra validar;
+    private final ValidarPalabra validar;
+    private ArrayList<String> cadenas;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private rojerusan.RSTableMetro JTPalabras;
     private javax.swing.JButton btnGraficar;
     private javax.swing.JButton btnIngresar;
     private javax.swing.JButton btnIngresarPalabra;
@@ -381,7 +431,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel lblAlfabeto;
     private javax.swing.JLabel lblGrafico;
     private javax.swing.JPanel panelGrafico;
-    private rojerusan.RSTableMetro rSTableMetro1;
     private javax.swing.JTextField txtExpresion;
     private javax.swing.JTextField txtPalabra;
     // End of variables declaration//GEN-END:variables
