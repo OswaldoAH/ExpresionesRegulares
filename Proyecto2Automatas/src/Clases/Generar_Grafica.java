@@ -8,7 +8,6 @@ package Clases;
 import dk.brics.automaton.Automaton;
 import dk.brics.automaton.RegExp;
 import java.io.DataOutputStream;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -58,7 +57,6 @@ public class Generar_Grafica {
             cmd[4] = fileOutputPath;
 
             Runtime rt = Runtime.getRuntime();
-
             rt.exec(cmd);
             return true;
         } catch (FileNotFoundException ex) {

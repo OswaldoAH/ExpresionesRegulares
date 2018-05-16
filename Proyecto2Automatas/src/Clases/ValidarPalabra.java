@@ -106,6 +106,7 @@ public class ValidarPalabra {
                     Estado.get(aux).setMoverA(moverA);
                     Estado.add(new Nodo());
                     i++;
+                    //ab(cdffff|d)
                     while (array[i] != '|' && array[i] != ')') {
                         if (array[i] != '*') {
                             caractes(array, i);
@@ -201,8 +202,6 @@ public class ValidarPalabra {
          */
         boolean encontrado = false;
         int moverse = 0;
-        moverA = new ArrayList<>();
-        comparar = new ArrayList<>();
         for (int i = 0; i < palabra.length; i++) {
             encontrado = false;
             comparar = Estado.get(moverse).getCompararCon();
@@ -213,6 +212,7 @@ public class ValidarPalabra {
                     encontrado = true;
                 }
             }
+            //ab     abb
             if (!encontrado) {
                 break;
             }
@@ -223,28 +223,7 @@ public class ValidarPalabra {
             return false;
         }
     }
-    /**
-     * Funcion para esta clase unicamente
-     * Y es para validar las EK
-     * recibe 2 parametros
-     * @param array
-     * @param i 
-     * 
-     * Lo que hace esta funcion es:
-     * tomar las listas del ultimo estado hasta ese momento
-     * decirle que se va a mover a el mismo cuando este buscando
-     * guardo el caracter anterio ya que el actual es un * EK
-     * eso se guarda en la lista del ultimo nodo hasta ese momento
-     * y le devuelvo las listas  al ultimo nodo.
-     */
-    private void EstrellaK(char[] array, int i) {
-        comparar = Estado.get(Estado.size() - 1).getCompararCon();
-        moverA = Estado.get(Estado.size() - 1).getMoverA();
-        moverA.add(Estado.size() - 1);
-        comparar.add("" + array[i - 1]);
-        Estado.get(Estado.size() - 1).setCompararCon(comparar);
-        Estado.get(Estado.size() - 1).setMoverA(moverA);
-    }
+    
 
     /**
      * Este metodo es para poner que estados son aceptados
@@ -252,6 +231,7 @@ public class ValidarPalabra {
      * @param i 
      * 
      * Van a hacer aceptados cuando se el ultimo digito o cuando sea una union simple
+     * ab(cd|d)
      */
     private void Aceptado(char[] array, int i) {
         if (i + 1 == array.length) {
@@ -274,6 +254,7 @@ public class ValidarPalabra {
      *          devolvemos las listas
      *      fin condicion
      * fin for
+     * ab(cd|f)g
      */
     private void addEstados(int aux) {
         for (int j = 0; j < aux; j++) {
@@ -296,6 +277,8 @@ public class ValidarPalabra {
      * Cuando es union sin parentesis obtenemos las listas del estado inicial
      * agregamos el ultimo nodo hasta ese momento agregamos el caracter les regresamos
      * las listas al estado inicial y agregamos un nuevo estado
+     * 
+     * ab|de|fg
      */
     private void Union(char[] array, int i) {
         comparar = Estado.get(0).getCompararCon();
@@ -325,5 +308,28 @@ public class ValidarPalabra {
         Estado.get(Estado.size() - 1).setCompararCon(comparar);
         Estado.get(Estado.size() - 1).setMoverA(moverA);
         Estado.add(new Nodo());
+    }
+    /**
+     * Funcion para esta clase unicamente
+     * Y es para validar las EK
+     * recibe 2 parametros
+     * @param array
+     * @param i 
+     * 
+     * Lo que hace esta funcion es:
+     * tomar las listas del ultimo estado hasta ese momento
+     * decirle que se va a mover a el mismo cuando este buscando
+     * guardo el caracter anterio ya que el actual es un * EK
+     * eso se guarda en la lista del ultimo nodo hasta ese momento
+     * y le devuelvo las listas  al ultimo nodo.
+     * a*
+     */
+    private void EstrellaK(char[] array, int i) {
+        comparar = Estado.get(Estado.size() - 1).getCompararCon();
+        moverA = Estado.get(Estado.size() - 1).getMoverA();
+        moverA.add(Estado.size() - 1);
+        comparar.add("" + array[i - 1]);
+        Estado.get(Estado.size() - 1).setCompararCon(comparar);
+        Estado.get(Estado.size() - 1).setMoverA(moverA);
     }
 }
